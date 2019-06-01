@@ -1,6 +1,6 @@
 stages:
-  - buildweb
-  - buildloadbalancer
+  - build
+  - build
   - unittestweb
   - deploy
 
@@ -15,7 +15,7 @@ before_script:
   - git config --global user.name "DanGahan"
 
 buildweb:
-  stage: buildweb
+  stage: build
   image: docker:1.11
   services:
     - docker:dind
@@ -31,7 +31,7 @@ buildweb:
     - variables 
 
 buildloadbalancer:
-  stage: buildloadbalancer
+  stage: build
   image: docker:1.11
   services:
     - docker:dind
