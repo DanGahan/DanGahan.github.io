@@ -23,6 +23,7 @@ buildweb:
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
   - echo "export WEBBVERSION=$(echo "$WEBVERSION")" >> variables
+  - ls
   - docker build . -t dangahan/gahandotmedotukweb:\$WEBVERSION
   - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
   - docker push dangahan/gahandotmedotukweb:\$WEBVERSION
