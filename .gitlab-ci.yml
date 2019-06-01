@@ -53,6 +53,7 @@ deploy:
     - docker:dind
   script:  
   - source variables
+  - ssh-keygen -R 178.79.155.32
   - ssh dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
   - ssh dan@178.79.155.32 -p 2222 "rm -rf GahanDotMeDotUkCompose"
   - ssh dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
