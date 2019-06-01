@@ -39,7 +39,7 @@ buildloadbalancer:
   - git clone https://"$GITUSER":"$GITPASSWORD"@github.com/DanGahan/GahanDotMeDotUkLoadbalancer.git
   - cd GahanDotMeDotUkLoadbalancer
   - export LBVERSION=$(git rev-parse HEAD)
-  - export LBBVERSION="$(echo "$LBVERSION")" >> variables
+  - echo "export LBBVERSION=$(echo "$LBVERSION")" >> variables
   - ls
   - docker build -t dangahan/gahandotmedotukloadbalancer:$LBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD" 
@@ -57,7 +57,7 @@ unittestweb:
   - source variables
   - cat variables
   - env
-  - docker run --name UnitTest -p 80:80 -p 443:443 -d  dangahan/gahandotmedotukweb:$VERSION
+  - docker run --name UnitTest -p 80:80 -p 443:443 -d  dangahan/gahandotmedotukweb:$WEBVERSION
   - curl http://127.0.0.1:80
   artifacts:
     paths: 
@@ -71,7 +71,7 @@ deploy:
   script:  
   - source variables
   - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
-  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && rm docker-compose.yml && rm .env"
+  - dan@178.79.155.32 -p 2222 "rm -rf GahanDotMeDotUkCompose"
   - dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
   - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && echo WEBTAG=$WEBVERSION >> .env && echo LBTAG=$LBVERSION >> .env"
   - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose up -d"   
