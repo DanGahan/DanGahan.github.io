@@ -53,11 +53,11 @@ deploy:
     - docker:dind
   script:  
   - source variables
-  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
-  - dan@178.79.155.32 -p 2222 "rm -rf GahanDotMeDotUkCompose"
-  - dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
-  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && echo WEBTAG=$WEBVERSION >> .env && echo LBTAG=$LBVERSION >> .env"
-  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose up -d"   
+  - ssh dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
+  - ssh dan@178.79.155.32 -p 2222 "rm -rf GahanDotMeDotUkCompose"
+  - ssh dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
+  - ssh dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && echo WEBTAG=$WEBVERSION >> .env && echo LBTAG=$LBVERSION >> .env"
+  - ssh dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose up -d"   
   artifacts:
     paths: 
      - variables 
