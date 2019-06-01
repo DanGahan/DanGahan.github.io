@@ -11,14 +11,15 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-  - apt-get install docker.io -y
-  - systemctl start docker
   - docker info
   - git config --global user.email "dangahan@gmail.com"
   - git config --global user.name "DanGahan"
 
-buildweb:
+docker:image:
   stage: buildweb
+  image: docker:1.11
+  services:
+    - docker:dind
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
   - export WEBBVERSION="$(echo "$WEBVERSION")" >> variables
@@ -29,8 +30,11 @@ buildweb:
     paths: 
     - variables 
 
-buildloadbalancer:
+docker:image:
   stage: buildloadbalancer
+  image: docker:1.11
+  services:
+    - docker:dind
   script:  
   - git clone git@github.com:DanGahan/GahanDotMeDotUkLoadbalancer.git
   - cd GahanDotMeDotUkLoadbalancer
@@ -43,17 +47,24 @@ buildloadbalancer:
     paths: 
      - variables 
 
-unittestweb:
+docker:image:
   stage: unittestweb
+  image: docker:1.11
+  services:
+    - docker:dind
   script:
   - source variables
   - docker run --name UnitTest -p 80:80 -p 443:443 -d  dangahan/gahandotmedotukweb:\$VERSION
+  - curl http://127.0.0.1:80
   artifacts:
     paths: 
      - variables
 
-deploy: 
+docker:image: 
   stage: deploy
+  image: docker:1.11
+  services:
+    - docker:dind
   script:  
   - source variables
   - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
