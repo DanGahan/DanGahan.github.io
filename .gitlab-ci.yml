@@ -1,3 +1,10 @@
+stages:
+  - buildweb
+  - buildloadbalancer
+  - unittestweb
+  - commit
+  - deploy
+
 before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
@@ -9,26 +16,30 @@ before_script:
   - git config --global user.name "DanGahan"
 
 buildweb:
+  stage: buildweb
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
-  - 'export WEBVERSION="$(echo "$WEBVERSION")"' >> variables
+  - export WEBBVERSION="$(echo "$WEBVERSION")" >> variables
   - docker build . -t dangahan/gahandotmedotukweb:\$WEBVERSION
   artifacts:
     paths: 
     - variables 
 
 buildloadbalancer:
+  stage: buildloadbalancer
   script:  
   - git clone git@github.com:DanGahan/GahanDotMeDotUkLoadbalancer.git
   - cd GahanDotMeDotUkLoadbalancer
   - export LBVERSION=$(git rev-parse HEAD)
-  - 'export LBBVERSION="$(echo "$LBVERSION")"' >> variables
+  - export LBBVERSION="$(echo "$LBVERSION")" >> variables
   - docker build . -t dangahan/gahandotmedotukloadbalancer:\$LBVERSION
   artifacts:
     paths: 
      - variables 
 
 unittestweb:
+  stage: unittestweb
+  script:
   - source variables
   - docker run --name UnitTest -p 80:80 -p 443:443 -d  dangahan/gahandotmedotukweb:\$VERSION
   artifacts:
@@ -36,6 +47,7 @@ unittestweb:
      - variables
 
 commit:
+  stage: commit
   script:  
   - source variables
   - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
@@ -46,6 +58,7 @@ commit:
      - variables 
 
 deploy: 
+  stage: deploy
   script:  
   - source variables
   - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
