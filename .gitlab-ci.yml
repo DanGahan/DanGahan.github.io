@@ -11,6 +11,7 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
+  - apt-get install docker -y
   - docker info
   - git config --global user.email "dangahan@gmail.com"
   - git config --global user.name "DanGahan"
@@ -21,6 +22,8 @@ buildweb:
   - export WEBVERSION=$(git rev-parse HEAD)
   - export WEBBVERSION="$(echo "$WEBVERSION")" >> variables
   - docker build . -t dangahan/gahandotmedotukweb:\$WEBVERSION
+  - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
+  - docker push dangahan/gahandotmedotukweb:\$WEBVERSION
   artifacts:
     paths: 
     - variables 
@@ -33,6 +36,8 @@ buildloadbalancer:
   - export LBVERSION=$(git rev-parse HEAD)
   - export LBBVERSION="$(echo "$LBVERSION")" >> variables
   - docker build . -t dangahan/gahandotmedotukloadbalancer:\$LBVERSION
+  - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD" 
+  - docker push dangahan/gahandotmedotukloadbalancer:\$LBVERSION
   artifacts:
     paths: 
      - variables 
@@ -45,17 +50,6 @@ unittestweb:
   artifacts:
     paths: 
      - variables
-
-commit:
-  stage: commit
-  script:  
-  - source variables
-  - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
-  - docker push dangahan/gahandotmedotukweb:\$WEBVERSION
-  - docker push dangahan/gahandotmedotukloadbalancer:\$LBVERSION
-  artifacts:
-    paths: 
-     - variables 
 
 deploy: 
   stage: deploy
