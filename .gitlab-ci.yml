@@ -24,8 +24,8 @@ buildweb:
   - export WEBVERSION=$(git rev-parse HEAD)
   - echo "export WEBBVERSION=$(echo "$WEBVERSION")" >> variables
   - ls
-  - docker build . -t dangahan/gahandotmedotukweb:$WEBVERSION
-  - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
+  - docker build -t dangahan/gahandotmedotukweb:$WEBVERSION .
+  - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
   - docker push dangahan/gahandotmedotukweb:$WEBVERSION
   artifacts:
     paths: 
@@ -42,8 +42,8 @@ buildloadbalancer:
   - export LBVERSION=$(git rev-parse HEAD)
   - export LBBVERSION="$(echo "$LBVERSION")" >> variables
   - ls
-  - docker build . -t dangahan/gahandotmedotukloadbalancer:$LBVERSION
-  - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD" 
+  - docker build -t dangahan/gahandotmedotukloadbalancer:$LBVERSION .
+  - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD" 
   - docker push dangahan/gahandotmedotukloadbalancer:$LBVERSION
   artifacts:
     paths: 
