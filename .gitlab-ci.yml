@@ -1,7 +1,6 @@
 stages:
   - buildweb
   - buildlb
-  - unittestweb
   - deploy
 
 before_script:
@@ -46,21 +45,6 @@ buildloadbalancer:
   artifacts:
     paths: 
      - variables 
-
-unittestweb:
-  stage: unittestweb
-  image: docker:1.11
-  services:
-    - docker:dind
-  script:
-  - source variables
-  - cat variables
-  - env
-  - docker run --name UnitTest -p 8080:8080 -p 443:443 -d  registry.hub.docker.com/dangahan/gahandotmedotukweb:$WEBVERSION
-  - curl http://127.0.0.1:8080 -v
-  artifacts:
-    paths: 
-     - variables
 
 deploy: 
   stage: deploy
