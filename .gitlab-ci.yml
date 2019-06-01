@@ -11,7 +11,8 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-  - apt-get install docker -y
+  - apt-get install docker.io -y
+  - systemctl start docker
   - docker info
   - git config --global user.email "dangahan@gmail.com"
   - git config --global user.name "DanGahan"
