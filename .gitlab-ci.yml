@@ -1,6 +1,6 @@
 stages:
-  - build
-  - build
+  - buildweb
+  - buildlb
   - unittestweb
   - deploy
 
@@ -15,13 +15,13 @@ before_script:
   - git config --global user.name "DanGahan"
 
 buildweb:
-  stage: build
+  stage: buildweb
   image: docker:1.11
   services:
     - docker:dind
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
-  - echo "export WEBBVERSION=$(echo "$WEBVERSION")" >> variables
+  - echo "export WEBVERSION=$(echo "$WEBVERSION")" >> variables
   - ls
   - docker build -t dangahan/gahandotmedotukweb:$WEBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
@@ -31,7 +31,7 @@ buildweb:
     - variables 
 
 buildloadbalancer:
-  stage: build
+  stage: buildlb
   image: docker:1.11
   services:
     - docker:dind
