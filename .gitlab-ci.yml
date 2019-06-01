@@ -57,7 +57,7 @@ unittestweb:
   - source variables
   - cat variables
   - env
-  - docker run --name UnitTest -p 80:80 -p 443:443 -d  dangahan/gahandotmedotukweb:$WEBVERSION
+  - docker run --name UnitTest -p 80:80 -p 443:443 -d  registry.hub.docker.com/dangahan/gahandotmedotukweb:$WEBVERSION
   - curl http://127.0.0.1:80
   artifacts:
     paths: 
