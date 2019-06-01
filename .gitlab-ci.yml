@@ -15,14 +15,14 @@ before_script:
   - git config --global user.email "dangahan@gmail.com"
   - git config --global user.name "DanGahan"
 
-docker:image:
+buildweb:
   stage: buildweb
   image: docker:1.11
   services:
     - docker:dind
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
-  - export WEBBVERSION="$(echo "$WEBVERSION")" >> variables
+  - echo "export WEBBVERSION=$(echo "$WEBVERSION")" >> variables
   - docker build . -t dangahan/gahandotmedotukweb:\$WEBVERSION
   - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
   - docker push dangahan/gahandotmedotukweb:\$WEBVERSION
@@ -30,7 +30,7 @@ docker:image:
     paths: 
     - variables 
 
-docker:image:
+buildloadbalancer:
   stage: buildloadbalancer
   image: docker:1.11
   services:
@@ -47,7 +47,7 @@ docker:image:
     paths: 
      - variables 
 
-docker:image:
+unittestweb:
   stage: unittestweb
   image: docker:1.11
   services:
@@ -60,7 +60,7 @@ docker:image:
     paths: 
      - variables
 
-docker:image: 
+deploy: 
   stage: deploy
   image: docker:1.11
   services:
