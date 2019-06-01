@@ -1,0 +1,59 @@
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - docker info
+  - git config --global user.email "dangahan@gmail.com"
+  - git config --global user.name "DanGahan"
+
+buildweb:
+  script:
+  - export WEBVERSION=$(git rev-parse HEAD)
+  - 'export WEBVERSION="$(echo "$WEBVERSION")"' >> variables
+  - docker build . -t dangahan/gahandotmedotukweb:\$WEBVERSION
+  artifacts:
+    paths: 
+    - variables 
+
+buildloadbalancer:
+  script:  
+  - git clone git@github.com:DanGahan/GahanDotMeDotUkLoadbalancer.git
+  - cd GahanDotMeDotUkLoadbalancer
+  - export LBVERSION=$(git rev-parse HEAD)
+  - 'export LBBVERSION="$(echo "$LBVERSION")"' >> variables
+  - docker build . -t dangahan/gahandotmedotukloadbalancer:\$LBVERSION
+  artifacts:
+    paths: 
+     - variables 
+
+unittestweb:
+  - source variables
+  - docker run --name UnitTest -p 80:80 -p 443:443 -d  dangahan/gahandotmedotukweb:\$VERSION
+  artifacts:
+    paths: 
+     - variables
+
+commit:
+  script:  
+  - source variables
+  - docker login "$DOCKERHUBUSER" "$DOCKERHUBPASSWORD"
+  - docker push dangahan/gahandotmedotukweb:\$WEBVERSION
+  - docker push dangahan/gahandotmedotukloadbalancer:\$LBVERSION
+  artifacts:
+    paths: 
+     - variables 
+
+deploy: 
+  script:  
+  - source variables
+  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose down"
+  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && rm docker-compose.yml && rm .env"
+  - dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
+  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && echo WEBTAG=$WEBVERSION >> .env && echo LBTAG=$LBVERSION >> .env"
+  - dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose up -d"   
+  artifacts:
+    paths: 
+     - variables 
+
