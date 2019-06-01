@@ -38,7 +38,7 @@ buildloadbalancer:
   - git clone https://"$GITUSER":"$GITPASSWORD"@github.com/DanGahan/GahanDotMeDotUkLoadbalancer.git
   - cd GahanDotMeDotUkLoadbalancer
   - export LBVERSION=$(git rev-parse HEAD)
-  - echo "export LBBVERSION=$(echo "$LBVERSION")" >> ../variables
+  - echo "export LBVERSION=$(echo "$LBVERSION")" >> ../variables
   - docker build -t dangahan/gahandotmedotukloadbalancer:$LBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD" 
   - docker push dangahan/gahandotmedotukloadbalancer:$LBVERSION
