@@ -6,7 +6,7 @@ stages:
   - deploy
 
 before_script:
-  - apk --update add openssh-client
+  - apk --update add openssh-client git
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
