@@ -1,0 +1,151 @@
+body {
+    margin: 40px;
+}
+
+/* defining fonts here */
+h1 {
+    color: #ffce00;
+    text-align: left;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5em;
+    margin-top: 0em;
+    margin-bottom: 0em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h2 {
+    color: #c0ccd4;
+    text-align: left;
+    text-decoration: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    margin-top: 0em;
+    font-size: 1em;
+}
+
+icons {
+    color: #c0ccd4;
+    text-align: left;
+    text-decoration: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    margin-top: 0em;
+    font-size: 1em;
+}
+
+#headerright a:link { color: #c0ccd4; }
+#headerright a:visited { color: #c0ccd4; }
+#headerright a:hover { color: #c0ccd4; }
+#headerright a:active { color: #c0ccd4; }
+
+body {
+    color: #ffffff
+    text-align: left;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin-top: 0em;
+    font-size: 1em;
+}
+
+p {
+    color: #ffffff;
+    text-align: left;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin-top: 0em;
+    font-size: 1em;
+}
+
+/* grid layout defined here */
+/* default box settings */
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+}
+/* header settings */  
+.header {
+    grid-area: header;
+    grid-column-start: 1; 
+    grid-column-end: 4; 
+    grid-row-start: 1; 
+    grid-row-end: 3;  
+    background-color: #484d5c;
+    margin-top: 10px;
+    border: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: grid;
+}
+
+.headerleft {
+    grid-row: 1;
+    grid-column: 1;
+    background-color: #484d5c;
+}
+
+.headerright {
+    grid-row: 1;
+    grid-column: 2;
+    background-color: #484d5c;
+    text-align: center 
+    }
+
+
+/* sidebar settings */  
+.sidebar {
+    grid-area: sidebar;
+    grid-row-start: 3; 
+    grid-row-end: 5;
+}
+/* content settings */  
+.content {
+    grid-area: content;
+    grid-row-start: 3; 
+    grid-row-end: 5;
+}
+/* footer settings */
+.footer {
+    grid-area: footer;
+    grid-column-start: 1; 
+    grid-column-end: 4; 
+    grid-row-start: 5; 
+    grid-row-end:5;  
+    background-color: #484d5c;
+}
+
+/* wrapper defines the layout */
+.wrapper {      
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 10% auto auto ;
+    grid-template-rows: 100% 10% 90% 100%);
+    grid-template-areas:
+        "....... header  header"
+        "sidebar content content"
+        "....... footer footer";
+    background-color: #fff;
+    color: #444;
+
+}
+ 
+/* profile pic on home page */
+.user {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
