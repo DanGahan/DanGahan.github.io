@@ -28,6 +28,9 @@ buildweb:
   artifacts:
     paths: 
     - variables 
+  only:
+    - master
+
 
 buildloadbalancer:
   stage: buildlb
@@ -45,6 +48,9 @@ buildloadbalancer:
   artifacts:
     paths: 
      - variables 
+  only:
+    - master
+
 
 deploy: 
   stage: deploy
@@ -61,4 +67,7 @@ deploy:
   artifacts:
     paths: 
      - variables 
+  only:
+    - master
+
 
