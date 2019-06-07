@@ -29,7 +29,9 @@ buildweb:
     paths: 
     - variables 
   only:
-    - master
+    variables:
+    - $CI_PIPELINE_SOURCE == "web"
+    - $CI_COMMIT_REF_NAME == "master"
 
 
 buildloadbalancer:
@@ -49,7 +51,9 @@ buildloadbalancer:
     paths: 
      - variables 
   only:
-    - master
+    variables:
+    - $CI_PIPELINE_SOURCE == "web"
+    - $CI_COMMIT_REF_NAME == "master"
 
 
 deploy: 
@@ -68,6 +72,8 @@ deploy:
     paths: 
      - variables 
   only:
-    - master
+    variables:
+    - $CI_PIPELINE_SOURCE == "web"
+    - $CI_COMMIT_REF_NAME == "master"
 
 
