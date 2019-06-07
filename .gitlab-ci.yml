@@ -28,6 +28,11 @@ buildweb:
   artifacts:
     paths: 
     - variables 
+  only:
+    variables:
+    - $CI_PIPELINE_SOURCE == "web"
+    - $CI_COMMIT_REF_NAME == "master"
+
 
 buildloadbalancer:
   stage: buildlb
@@ -45,6 +50,11 @@ buildloadbalancer:
   artifacts:
     paths: 
      - variables 
+  only:
+    variables:
+    - $CI_PIPELINE_SOURCE == "web"
+    - $CI_COMMIT_REF_NAME == "master"
+
 
 deploy: 
   stage: deploy
@@ -61,4 +71,9 @@ deploy:
   artifacts:
     paths: 
      - variables 
+  only:
+    variables:
+    - $CI_PIPELINE_SOURCE == "web"
+    - $CI_COMMIT_REF_NAME == "master"
+
 
