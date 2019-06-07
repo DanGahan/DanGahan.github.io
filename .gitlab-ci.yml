@@ -88,8 +88,7 @@ scanweb:
   artifacts:
     paths: 
      - variables 
-    reports:
-      container_scanning: gl-container-scanning-report.json
+     - gl-container-scanning-report.json
 
 deploy: 
   stage: deploy
