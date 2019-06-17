@@ -23,6 +23,8 @@ buildweb:
   - export WEBVERSION=$(git rev-parse HEAD)
   - echo "export WEBVERSION=$(echo "$WEBVERSION")" >> variables
   - ls
+  - sed -i "" "s|DD-MM-YYYY|$(date '+%d/%m/%Y')|g" footer.html
+  - sed -i "" "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
   - docker build -t dangahan/gahandotmedotukweb:$WEBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
   - docker push dangahan/gahandotmedotukweb:$WEBVERSION
