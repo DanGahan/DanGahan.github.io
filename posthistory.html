@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Personal website of Dan Gahan.">
+        <meta name="author" content="Dan Gahan">
+      
+        <title>GAHAN dot ME dot UK</title>
+      
+        <!-- CSS File-->
+        <link href="/css/site.css" rel="stylesheet" type="text/css" media="all">
+      
+        <!-- JQuery used for the div includes-->
+        <script src="/js/jquery.js"></script> 
+        <script> 
+            $(function(){
+                $("#header").load("/header.html"); 
+                $("#headerright").load("/headerright.html"); 
+                $("#content").load("posthistorycontent.html");
+                $("#footer").load("/footer.html");
+            });
+        </script> 
+
+        <!-- include google font for header-->
+        <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Roboto:300,700" rel="stylesheet">
+
+        <!-- font awesome used for icons-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="box header">
+            <div id="header" class="box headerleft"></div>
+            <div id="headerright" class="box headerright"></div>
+        </div>
+        <div id="content" class="box content"></div>
+        <div id="footer" class="box footer"></div>
+    </div>                      
+</body>
