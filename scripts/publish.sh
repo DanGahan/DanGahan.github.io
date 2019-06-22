@@ -100,7 +100,7 @@ rm ../tmp/*
     echo "<title>" >> ../tmp/rssnewitem.tmp
     sed -n 3p ../tmp/content.html >> ../tmp/rssnewitem.tmp
     echo "</title>" >> ../tmp/rssnewitem.tmp
-    echo "<guid>https://gahan.me.uk/posts/'$dirname'/'$title'.html</guid>" >> ../tmp/rssnewitem.tmp 
+    echo "<guid>https://gahan.me.uk/posts/$dirname/$title.html</guid>" >> ../tmp/rssnewitem.tmp 
     echo "<description>" >> ../tmp/rssnewitem.tmp
     echo "<![CDATA[" >> ../tmp/rssnewitem.tmp
     cat ../tmp/post.tmp  >> ../tmp/rssnewitem.tmp
