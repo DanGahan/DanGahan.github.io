@@ -117,6 +117,11 @@ foot {
     font-weight: normal; 
 }
 
+#footer a:link { color: #c4c8ce;; }
+#footer a:visited { color: #c4c8ce;; }
+#footer a:hover { color: #c4c8ce;; }
+#footer a:active { color: #c4c8ce;; }
+
 /* grid layout defined here */
 /* default box settings */
 .box {
