@@ -89,10 +89,10 @@ rm ../tmp/*
 
     #Copy rss.xml to tmp dir
     cp ../rss.xml ../tmp
-    #Store first 8 lines of rss.sml in tmp file
-    head -n 8 ../tmp/rss.xml > ../tmp/rsshead.tmp
-    #Remove First 8 lines of rss.xml
-    sed -i "" '1,8d'  ../tmp/rss.xml
+    #Store first 6 lines of rss.sml in tmp file
+    head -n 6 ../tmp/rss.xml > ../tmp/rsshead.tmp
+    #Remove First 6 lines of rss.xml
+    sed -i "" '1,6d'  ../tmp/rss.xml
     #Copy tmp rss.xml to rssbottom.tmp
     cp ../tmp/rss.xml ../tmp/rssbottom.tmp
     #Create new item
@@ -103,7 +103,8 @@ rm ../tmp/*
     echo "<guid>https://gahan.me.uk/posts/$dirname/$title.html</guid>" >> ../tmp/rssnewitem.tmp 
     echo "<description>" >> ../tmp/rssnewitem.tmp
     echo "<![CDATA[" >> ../tmp/rssnewitem.tmp
-    cat ../tmp/post.tmp  >> ../tmp/rssnewitem.tmp
+    sed -n 's:.*<intro>\(.*\)</intro>.*:\1:p' ../posts/CardiffCityFixtures2019202022062019/content.html | sed -e 's/^[[:space:]]*//'  >> ../tmp/rssnewitem.tmp
+    echo '<a href="https://gahan.me.uk/posts/'$dirname'/'$title'.html">Continue Reading</a>' >> ../tmp/rssnewitem.tmp
     echo "]]>" >> ../tmp/rssnewitem.tmp
     echo "</description>" >> ../tmp/rssnewitem.tmp
     echo "</item> " >> ../tmp/rssnewitem.tmp
