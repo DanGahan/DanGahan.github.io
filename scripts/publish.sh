@@ -85,9 +85,31 @@ rm ../tmp/*
     echo "<p>" "&#8226; &nbsp" $title "&nbsp" $date "&nbsp" $link "</p>" >> ../posthistorycontent.html
     echo "<br>" >> ../posthistorycontent.html
 
-
-
-
-
-
 #Add entry to RSS feed for post
+
+    #Copy rss.xml to tmp dir
+    cp ../rss.xml ../tmp
+    #Store first 8 lines of rss.sml in tmp file
+    head -n 8 ../tmp/rss.xml > ../tmp/rsshead.tmp
+    #Remove First 8 lines of rss.xml
+    sed -i "" '1,8d'  ../tmp/rss.xml
+    #Copy tmp rss.xml to rssbottom.tmp
+    cp ../tmp/rss.xml ../tmp/rssbottom.tmp
+    #Create new item
+    echo "<item>" >> ../tmp/rssnewitem.tmp
+    echo "<title>" >> ../tmp/rssnewitem.tmp
+    sed -n 3p ../tmp/content.html >> ../tmp/rssnewitem.tmp
+    echo "</title>" >> ../tmp/rssnewitem.tmp
+    echo "<guid>https://gahan.me.uk/posts/'$dirname'/'$title'.html</guid>" >> ../tmp/rssnewitem.tmp 
+    echo "<description>" >> ../tmp/rssnewitem.tmp
+    echo "<![CDATA[" >> ../tmp/rssnewitem.tmp
+    cat ../tmp/post.tmp  >> ../tmp/rssnewitem.tmp
+    echo "]]>" >> ../tmp/rssnewitem.tmp
+    echo "</description>" >> ../tmp/rssnewitem.tmp
+    echo "</item> " >> ../tmp/rssnewitem.tmp
+    #Reconstruct XML file
+    cat ../tmp/rsshead.tmp > ../tmp/rss.xml
+    cat ../tmp/rssnewitem.tmp >> ../tmp/rss.xml
+    cat ../tmp/rssbottom.tmp >> ../tmp/rss.xml
+    #Move new XML file back into root dir
+    cp -f ../tmp/rss.xml ../rss.xml
