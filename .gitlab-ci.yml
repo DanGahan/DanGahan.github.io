@@ -21,8 +21,6 @@ buildweb:
     - docker:dind
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
-  - git tag RELEASE_$WEBVERSION
-  - git push origin RELEASE_$WEBVERSION
   - echo "export WEBVERSION=$(echo "$WEBVERSION")" >> variables
   - ls
   - sed -i  "s|DD-MM-YYYY|$(date '+%d/%m/%Y')|g" footer.html
