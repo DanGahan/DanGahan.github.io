@@ -82,7 +82,7 @@ rm ../tmp/*
     #Add Post to posthistory.html
     date=`sed -n 's:.*>\(.*\)</h4>.*:\1:p' ../posts/$dirname/content.html`
     link=`echo '<a href="/posts/'$dirname'/'$title'.html">Read</a>'`
-    posttitle=`sed -n 3p ../tmp/content.html >> ../tmp/rssnewitem.tmp`
+    posttitle=`sed -n 3p ../tmp/content.html`
     echo "<p>" "&#8226; &nbsp" $posttitle "&nbsp" $date "&nbsp" $link "</p>" >> ../posthistorycontent.html
     echo "<br>" >> ../posthistorycontent.html
 
@@ -104,7 +104,7 @@ rm ../tmp/*
     echo "<guid>https://gahan.me.uk/posts/$dirname/$title.html</guid>" >> ../tmp/rssnewitem.tmp 
     echo "<description>" >> ../tmp/rssnewitem.tmp
     echo "<![CDATA[" >> ../tmp/rssnewitem.tmp
-    sed -n 's:.*<intro>\(.*\)</intro>.*:\1:p' ../posts/CardiffCityFixtures2019202022062019/content.html | sed -e 's/^[[:space:]]*//'  >> ../tmp/rssnewitem.tmp
+    sed -n 's:.*<intro>\(.*\)</intro>.*:\1:p' ../posts/$dirname/content.html | sed -e 's/^[[:space:]]*//'  >> ../tmp/rssnewitem.tmp
     echo '<a href="https://gahan.me.uk/posts/'$dirname'/'$title'.html">Continue Reading</a>' >> ../tmp/rssnewitem.tmp
     echo "]]>" >> ../tmp/rssnewitem.tmp
     echo "</description>" >> ../tmp/rssnewitem.tmp
