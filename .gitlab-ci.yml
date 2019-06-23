@@ -21,7 +21,7 @@ buildweb:
     - docker:dind
   script:
   - export WEBVERSION=$(git rev-parse HEAD)
-  - git tag RELEASE_$WEBVERSION master
+  - git tag RELEASE_$WEBVERSION
   - git push origin RELEASE_$WEBVERSION
   - echo "export WEBVERSION=$(echo "$WEBVERSION")" >> variables
   - ls
