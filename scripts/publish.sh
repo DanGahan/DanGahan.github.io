@@ -82,7 +82,8 @@ rm ../tmp/*
     #Add Post to posthistory.html
     date=`sed -n 's:.*>\(.*\)</h4>.*:\1:p' ../posts/$dirname/content.html`
     link=`echo '<a href="/posts/'$dirname'/'$title'.html">Read</a>'`
-    echo "<p>" "&#8226; &nbsp" $title "&nbsp" $date "&nbsp" $link "</p>" >> ../posthistorycontent.html
+    posttitle=`sed -n 3p ../tmp/content.html >> ../tmp/rssnewitem.tmp`
+    echo "<p>" "&#8226; &nbsp" $posttitle "&nbsp" $date "&nbsp" $link "</p>" >> ../posthistorycontent.html
     echo "<br>" >> ../posthistorycontent.html
 
 #Add entry to RSS feed for post
