@@ -132,6 +132,18 @@ p {
     -webkit-font-smoothing: antialiased;
 }
 
+
+ol {
+    color: #333;
+    text-align: left;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin-top: 0em;
+    font-size: 0.75em;
+    -webkit-font-smoothing: antialiased;
+}
+
 ul {
     color: #333;
     text-align: left;
