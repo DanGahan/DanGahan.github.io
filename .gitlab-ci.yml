@@ -64,14 +64,16 @@ unittestweb:
   image: docker:1.11
   services:
     - docker:dind
+  variables:
+    - DOCKER_HOST: tcp://docker:2375
+    - DOCKER_DRIVER: overlay2
   script: 
     - source variables
     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
     - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
     - docker ps -a
     - netstat -anp | grep 80
-    - curl gahandotmedotukweb -v
-    - curl localhost:80 -v 
+    - env | grep -i UnitTest
 
 
 scanweb:
