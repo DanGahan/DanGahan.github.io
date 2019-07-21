@@ -73,7 +73,8 @@ unittestweb:
   script: 
     - source variables
     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
-    - docker run --name UnitTest --link dind:docker -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
+    - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
+    - curl -v http://docker:80 
 
 
 
