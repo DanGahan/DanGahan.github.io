@@ -76,7 +76,7 @@ unittestweb:
     - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
     - docker ps -a
     - netstat -anp | grep 80
-    - env | grep -i UnitTest
+    - env 
 
 
 scanweb:
