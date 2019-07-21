@@ -65,11 +65,12 @@ unittestweb:
   services:
     - docker:dind
   script: 
-    - docker info
+    - source variables
     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
     - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
     - docker ps -a
     - netstat -anp | grep 80
+    
 
 
 scanweb:
