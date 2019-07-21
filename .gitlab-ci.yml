@@ -74,7 +74,9 @@ unittestweb:
     - source variables
     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
     - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
-    - curl -v http://docker:80 
+    - RESULT=`curl -s -o /dev/null -w "%{http_code}"  http://docker:80`
+    - echo $RESULT
+    - if [ "$RESULT" == "200" ]; then exit 0"; else exit 1"; fi
 
 
 
