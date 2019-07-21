@@ -64,13 +64,18 @@ unittestweb:
   image: docker:1.11
   services:
     - docker:dind
+
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
+
+
   script: 
     - source variables
     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
-    - docker run dangahan/gahandotmedotukweb:$WEBVERSION /usr/share/nginx/html/tests/unit.sh
+    - docker run --name UnitTest --link dind:docker -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
+
+
 
 scanweb:
   stage: scanweb
