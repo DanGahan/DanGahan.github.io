@@ -59,60 +59,60 @@ buildloadbalancer:
     - $CI_PIPELINE_SOURCE == "web"
     - $CI_COMMIT_REF_NAME == "master"
 
-unittestweb:
-  stage: unittestweb
-  image: docker:1.11
-  services:
-    - docker:dind
+# unittestweb:
+#   stage: unittestweb
+#   image: docker:1.11
+#   services:
+#     - docker:dind
 
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-
-
-  script: 
-    - source variables
-    - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
-    - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
-    - RESULT=`curl -s -o /dev/null -w "%{http_code}"  http://docker:80`
-    - echo $RESULT
-    - if [ "$RESULT" == "200" ]; then exit 0; else exit 1; fi
+#   variables:
+#     DOCKER_HOST: tcp://docker:2375
+#     DOCKER_DRIVER: overlay2
 
 
+#   script: 
+#     - source variables
+#     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
+#     - docker run --name UnitTest -d -p 80:80 dangahan/gahandotmedotukweb:$WEBVERSION
+#     - RESULT=`curl -s -o /dev/null -w "%{http_code}"  http://docker:80`
+#     - echo $RESULT
+#     - if [ "$RESULT" == "200" ]; then exit 0; else exit 1; fi
 
-scanweb:
-  stage: scanweb
-  image: docker:stable
-  variables:
-    DOCKER_DRIVER: overlay2
-    ## Define two new variables based on GitLab's CI/CD predefined variables
-    ## https://docs.gitlab.com/ee/ci/variables/README.html#predefined-environment-variables
-    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
-    CI_APPLICATION_TAG: $CI_COMMIT_SHA
-    CLAIR_LOCAL_SCAN_VERSION: v2.0.8_fe9b059d930314b54c78f75afe265955faf4fdc1
-  allow_failure: true
-  services:
-    - docker:stable-dind
-  script:
-    - source variables 
-    - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
-    - docker run -d --name db arminc/clair-db:latest
-    - docker run -p 6060:6060 --link db:postgres -d --name clair --restart on-failure arminc/clair-local-scan:${CLAIR_LOCAL_SCAN_VERSION}
-    - apk add -U wget ca-certificates
-    - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
-    - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
-    - mv clair-scanner_linux_amd64 clair-scanner
-    - chmod +x clair-scanner
-    - touch clair-whitelist.yml
-    - while( ! wget -q -O /dev/null http://docker:6060/v1/namespaces ) ; do sleep 1 ; done
-    - retries=0
-    - echo "Waiting for clair daemon to start"
-    - while( ! wget -T 10 -q -O /dev/null http://docker:6060/v1/namespaces ) ; do sleep 1 ; echo -n "." ; if [ $retries -eq 10 ] ; then echo " Timeout, aborting." ; exit 1 ; fi ; retries=$(($retries+1)) ; done
-    - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml dangahan/gahandotmedotukweb:$WEBVERSION || true
-  artifacts:
-    paths: 
-     - variables 
-     - gl-container-scanning-report.json
+
+
+# scanweb:
+#   stage: scanweb
+#   image: docker:stable
+#   variables:
+#     DOCKER_DRIVER: overlay2
+#     ## Define two new variables based on GitLab's CI/CD predefined variables
+#     ## https://docs.gitlab.com/ee/ci/variables/README.html#predefined-environment-variables
+#     CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+#     CI_APPLICATION_TAG: $CI_COMMIT_SHA
+#     CLAIR_LOCAL_SCAN_VERSION: v2.0.8_fe9b059d930314b54c78f75afe265955faf4fdc1
+#   allow_failure: true
+#   services:
+#     - docker:stable-dind
+#   script:
+#     - source variables 
+#     - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
+#     - docker run -d --name db arminc/clair-db:latest
+#     - docker run -p 6060:6060 --link db:postgres -d --name clair --restart on-failure arminc/clair-local-scan:${CLAIR_LOCAL_SCAN_VERSION}
+#     - apk add -U wget ca-certificates
+#     - docker pull dangahan/gahandotmedotukweb:$WEBVERSION
+#     - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
+#     - mv clair-scanner_linux_amd64 clair-scanner
+#     - chmod +x clair-scanner
+#     - touch clair-whitelist.yml
+#     - while( ! wget -q -O /dev/null http://docker:6060/v1/namespaces ) ; do sleep 1 ; done
+#     - retries=0
+#     - echo "Waiting for clair daemon to start"
+#     - while( ! wget -T 10 -q -O /dev/null http://docker:6060/v1/namespaces ) ; do sleep 1 ; echo -n "." ; if [ $retries -eq 10 ] ; then echo " Timeout, aborting." ; exit 1 ; fi ; retries=$(($retries+1)) ; done
+#     - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml dangahan/gahandotmedotukweb:$WEBVERSION || true
+#   artifacts:
+#     paths: 
+#      - variables 
+#      - gl-container-scanning-report.json
 
 deploy: 
   stage: deploy
