@@ -2,9 +2,8 @@
 <channel>
   <title>GAHAN dot ME dot UK</title>
   <link>https://gahan.me.uk</link>
-  <atom:link href="https://gahan.me.uk/rss.xml" rel="self" type="application/rss+xml" />
+  <atom:link href="https://gahan.me.uk/rss.xml" rel="self" type="application/rss+xml"/>
   <description>Personal website of Dan Gahan.</description>
-<item>
 <item>
 <title>
 Podcasts Podcasts Podcasts…
