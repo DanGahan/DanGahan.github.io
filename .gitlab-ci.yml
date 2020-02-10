@@ -44,8 +44,7 @@ buildloadbalancer:
   services:
     - docker:dind
   script:  
-  - git clone git@github.com:DanGahan/GahanDotMeDotUkLoadbalancer.git
-  - cd GahanDotMeDotUkLoadbalancer
+  - cd Loadbalancer
   - export LBVERSION=$(git rev-parse HEAD)
   - echo "export LBVERSION=$(echo "$LBVERSION")" >> ../variables
   - docker build -t dangahan/gahandotmedotukloadbalancer:$LBVERSION .
