@@ -28,7 +28,7 @@ buildweb:
   - sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
   - docker build -t dangahan/gahandotmedotukweb:$WEBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
-  - docker push $WEBVERSION
+  - docker push dangahan/gahandotmedotukweb:$WEBVERSION
   - curl -X POST --data-urlencode 'payload={"text":"Gitlab CICD - Web Build Complete"}' ${{SLACK_WEBHOOK_URL}}
   artifacts:
     paths: 
