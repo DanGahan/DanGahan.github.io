@@ -129,7 +129,6 @@ deploy:
   - ssh -o StrictHostKeyChecking=no dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
   - ssh -o StrictHostKeyChecking=no dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && echo WEBTAG=$WEBVERSION >> .env && echo LBTAG=$LBVERSION >> .env"
   - ssh -o StrictHostKeyChecking=no dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose up -d"   
-  - "curl  -X POST -H 'Content-type: application/json' --data '{"text":"Deploy Successfully Completed"}' https://hooks.slack.com/services/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"
   - curl -X POST --data-urlencode 'payload={"text":"Gitlab CICD - Deploy Complete"}' ${{SLACK_WEBHOOK_URL}}
   artifacts:
     paths: 
