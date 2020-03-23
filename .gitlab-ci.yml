@@ -29,7 +29,7 @@ buildweb:
   - docker build -t dangahan/gahandotmedotukweb:$WEBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD"
   - docker push $WEBVERSION
-  - curl  -X POST -H 'Content-type: application/json' --data '{"text":"Web Container dangahan/gahandotmedotukweb:$WEBVERSION successfully built"}' https://hooks.slack.com/services/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
+  - "curl  -X POST -H 'Content-type: application/json' --data '{"text":"Web Container dangahan/gahandotmedotukweb:$WEBVERSION successfully built"}' https://hooks.slack.com/services/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"
   artifacts:
     paths: 
     - variables 
@@ -51,7 +51,7 @@ buildloadbalancer:
   - docker build -t dangahan/gahandotmedotukloadbalancer:$LBVERSION .
   - docker login -u "$DOCKERHUBUSER" -p "$DOCKERHUBPASSWORD" 
   - docker push dangahan/gahandotmedotukloadbalancer:$LBVERSION
-  - curl  -X POST -H 'Content-type: application/json' --data '{"text":"Load Balancer Container dangahan/gahandotmedotukloadbalancer:$LBVERSION successfully built"}' https://hooks.slack.com/services/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
+  - "curl  -X POST -H 'Content-type: application/json' --data '{"text":"Load Balancer Container dangahan/gahandotmedotukloadbalancer:$LBVERSION successfully built"}' https://hooks.slack.com/services/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"
   artifacts:
     paths: 
      - variables 
@@ -78,7 +78,7 @@ unittestweb:
     - RESULT=`curl -s -o /dev/null -w "%{http_code}"  http://docker:80`
     - echo $RESULT
     - if [ "$RESULT" == "200" ]; then exit 0; else exit 1; fi
-    - curl  -X POST -H 'Content-type: application/json' --data '{"text":"Web Unit Test Complete"}' https://hooks.slack.com/services/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
+    - "curl  -X POST -H 'Content-type: application/json' --data '{"text":"Web Unit Test Complete"}' https://hooks.slack.com/services/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"
 
 
 
@@ -111,7 +111,7 @@ scanweb:
     - echo "Waiting for clair daemon to start"
     - while( ! wget -T 10 -q -O /dev/null http://docker:6060/v1/namespaces ) ; do sleep 1 ; echo -n "." ; if [ $retries -eq 10 ] ; then echo " Timeout, aborting." ; exit 1 ; fi ; retries=$(($retries+1)) ; done
     - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml dangahan/gahandotmedotukweb:$WEBVERSION || true
-    - curl  -X POST -H 'Content-type: application/json' --data '{"text":"Clair Scan Complete"}' https://hooks.slack.com/services/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
+    - "curl  -X POST -H 'Content-type: application/json' --data '{"text":"Clair Scan Complete"}' https://hooks.slack.com/services/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"
   artifacts:
     paths: 
      - variables 
@@ -129,7 +129,7 @@ deploy:
   - ssh -o StrictHostKeyChecking=no dan@178.79.155.32 -p 2222 "git clone git@github.com:DanGahan/GahanDotMeDotUkCompose.git"
   - ssh -o StrictHostKeyChecking=no dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && echo WEBTAG=$WEBVERSION >> .env && echo LBTAG=$LBVERSION >> .env"
   - ssh -o StrictHostKeyChecking=no dan@178.79.155.32 -p 2222 "cd ~/GahanDotMeDotUkCompose && /bin/sudo /bin/docker-compose up -d"   
-  - curl  -X POST -H 'Content-type: application/json' --data '{"text":"Deploy Successfully Completed"}' https://hooks.slack.com/services/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
+  - "curl  -X POST -H 'Content-type: application/json' --data '{"text":"Deploy Successfully Completed"}' https://hooks.slack.com/services/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"
   artifacts:
     paths: 
      - variables 
