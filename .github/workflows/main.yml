@@ -23,6 +23,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      #Git setup
+      - name: git setup
+	run: |
+	 git config --global user.email "dangahan@gmail.com"
+         git config --global user.name "DanGahan - GitHub Action"
+		  
+
       # Update the footer.html with latest info
       - name: update footer.html
         run: |
