@@ -23,13 +23,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      #Git setup
-      - name: git setup
-        run: |
-          git config --global user.email "dangahan@gmail.com"
-          git config --global user.name "DanGahan - GitHub Action"
-  
-
       # Update the footer.html with latest info
       - name: update footer.html
         run: |
@@ -37,10 +30,6 @@ jobs:
           sed -i "s|XX-YEAR-XX|$(date '+%Y')|g" footer.html
           sed -i  "s|DD-MM-YYYY|$(date '+%d/%m/%Y')|g" footer.html
           sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
-
-     # Delete actions yaml file
-     - name: remove actions file
-       run: rm .github/workflows.main.yml
 
       # Push into dangahan.github.io repo to publish
       - name: Pushe
