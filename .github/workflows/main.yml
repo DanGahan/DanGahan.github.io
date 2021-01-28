@@ -38,13 +38,19 @@ jobs:
           sed -i  "s|DD-MM-YYYY|$(date '+%d/%m/%Y')|g" footer.html
           sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
 
-      # Push into dangahan.github.io repo to publish
-      - name: Run a multi-line script
-        run: |
-          sed -i "s|git@github.com:DanGahan/GahanDotMeDotUkWeb.git|git@github.com:DanGahan/DanGahan.github.io.git|g" .git/config
-          git add footer.html
-          git commit -m "Automated Commit from Actions"
-          git push origin master
+     # Delete actions yaml file
+     - name: remove actions file
+       run: rm .github/workflows.main.yml
 
+      # Push into dangahan.github.io repo to publish
+      - name: Pushe
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'output'
+          destination-github-username: 'dangahan'
+          destination-repository-name: 'dangahan.github.io'
+          user-email: action@gahan.me.uk
       # Slack Web Hook
 
