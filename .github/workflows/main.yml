@@ -32,7 +32,7 @@ jobs:
           sed -i "s|XX-YEAR-XX|$(date '+%Y')|g" footer.html
           sed -i  "s|DD-MM-YYYY|$(date '+%d/%m/%Y')|g" footer.html
           sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
-          git remote add site git@github.com:DanGahan/DanGahan.github.io.git
+          git remote add site https://github.com/DanGahan/DanGahan.github.io.git
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -m "Add changes" -a
