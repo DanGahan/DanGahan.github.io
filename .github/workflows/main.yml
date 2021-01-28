@@ -30,16 +30,15 @@ jobs:
           sed -i "s|XX-YEAR-XX|$(date '+%Y')|g" footer.html
           sed -i  "s|DD-MM-YYYY|$(date '+%d/%m/%Y')|g" footer.html
           sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
-
-      # Push into dangahan.github.io repo to publish
-      - name: Pushe
-        uses: cpina/github-action-push-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+    
+      - name: Push changes
+        uses: dangahan/dangahan.github.io@master
         with:
-          source-directory: '.'
-          destination-github-username: 'dangahan'
-          destination-repository-name: 'dangahan.github.io'
-          user-email: action@gahan.me.uk
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
+
       # Slack Web Hook
 
