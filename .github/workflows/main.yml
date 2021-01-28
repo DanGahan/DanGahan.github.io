@@ -34,7 +34,7 @@ jobs:
       # Push into dangahan.github.io repo to publish
       - name: Run a multi-line script
         run: |
-          sed -I "s|git@github.com:DanGahan/GahanDotMeDotUkWeb.git|git@github.com:DanGahan/DanGahan.github.io.git|g" .git/config
+          sed -i "s|git@github.com:DanGahan/GahanDotMeDotUkWeb.git|git@github.com:DanGahan/DanGahan.github.io.git|g" .git/config
           git commit -m "Automated Commit from Actions"
           git push origin master
 
