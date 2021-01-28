@@ -25,10 +25,10 @@ jobs:
 
       #Git setup
       - name: git setup
-	run: |
-	 git config --global user.email "dangahan@gmail.com"
-         git config --global user.name "DanGahan - GitHub Action"
-		  
+        run: |
+          git config --global user.email "dangahan@gmail.com"
+          git config --global user.name "DanGahan - GitHub Action"
+  
 
       # Update the footer.html with latest info
       - name: update footer.html
