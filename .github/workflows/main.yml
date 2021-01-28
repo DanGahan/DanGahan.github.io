@@ -42,6 +42,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           sed -i "s|git@github.com:DanGahan/GahanDotMeDotUkWeb.git|git@github.com:DanGahan/DanGahan.github.io.git|g" .git/config
+          git add footer.html
           git commit -m "Automated Commit from Actions"
           git push origin master
 
