@@ -27,9 +27,9 @@ jobs:
       - name: update footer.html
         run: |
           export WEBVERSION=$(git rev-parse HEAD)
-          sed -i "s|XX-YEAR-XX|$(date '+%Y')|g" footer.html
+          sed -i "s|20..|$(date '+%Y')|g" footer.htm
           sed -i  "s|Build Stamp.*|Build Stamp: $(date '+%d/%m/%Y')|g" footer.html
-          sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
+          sed -i  "s|Build Ref.*|iBuild Ref: $WEBVERSION|g" footer.html
           git config --global user.name "Automated Action"
           git config --global user.email "automatedaction@gahan.me.uk"
           git add footer.html
