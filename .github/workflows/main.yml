@@ -31,7 +31,7 @@ jobs:
           sed -i  "s|Build Stamp.*|Build Stamp: $(date '+%d/%m/%Y')|g" footer.html
           sed -i  "s|XXX-XXX-XXX|$WEBVERSION|g" footer.html
           git config --global user.name "Automated Action"
-          git config --global user.email "automatedaction@gahan.me.uk
+          git config --global user.email "automatedaction@gahan.me.uk"
           git add footer.html
           git commit -m "auto commit from actions"
           git push origin master
