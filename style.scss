@@ -278,16 +278,17 @@ nav {
 }
 
 .wrapper-footer {
-  margin-top: 50px;
+  margin-top: 25px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: $lightGray;
 }
 
 footer {
-  padding: 50px 0;
+  position:fixed;
+  padding: 10px 0;
   text-align: center;
-  overflow: auto;
+  
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
