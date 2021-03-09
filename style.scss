@@ -201,7 +201,10 @@ img {
   font-weight: bold;
 }
 
-a.site-name:hover { color: black;}
+a.site-name:link { color: black; text-decoration:underline; font-weight:bold; }
+a.site-name:visited { color: black; text-decoration:underline; font-weight:bold; }
+a.site-name:hover { color: black; text-decoration:underline; font-weight:bold; }
+a.site-name:active { color: black; text-decoration:underline; font-weight:bold; }
 
 .site-description {
   margin: -5px 0 0 0;
