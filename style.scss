@@ -100,6 +100,7 @@ ul ul, ol ul {
 
 em, i {
   font-style: italic;
+  font-size: 10;
 }
 
 strong, b {
@@ -273,7 +274,6 @@ nav {
 
 .wrapper-footer {
   margin-top: 25px;
-  font-size: 5px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: $lightGray;
