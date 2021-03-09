@@ -18,6 +18,6 @@ jobs:
       - uses: everlytic/branch-merge@1.1.0
         with:
           github_token: ${{ secrets.JEKYLL_PAT }}
-            source_ref: 'gh-pages'
-            target_branch: 'master'
-            commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
+          source_ref: 'gh-pages'
+          target_branch: 'master'
+          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
