@@ -256,6 +256,7 @@ nav {
 .posts > .post:last-child {
   padding-bottom: 1em;
   border-bottom: none;
+  margin-bottom: 100px;
 }
 
 .post {
@@ -279,7 +280,7 @@ nav {
 }
 
 .wrapper-footer {
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
   margin-top: 25px;
