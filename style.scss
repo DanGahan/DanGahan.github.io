@@ -251,12 +251,13 @@ nav {
 .posts > .post {
   padding-bottom: 2em;
   border-bottom: 1px solid $lightGray;
+  margin-bottom: 100px;
 }
 
 .posts > .post:last-child {
   padding-bottom: 1em;
   border-bottom: none;
-  margin-bottom: 100px;
+  
 }
 
 .post {
