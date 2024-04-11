@@ -16,4 +16,6 @@ As previously predicted, I rarely actually blog. However, on the odd occasion th
 
 ### Contact me
 
-[dangahan@gmail.com](mailto:dangahan@gmail.com)
+I can be found in all the usual places
+<br/><br/>
+{% include svg-icons.html %}
