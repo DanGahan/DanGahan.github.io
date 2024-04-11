@@ -7,6 +7,5 @@ group :jekyll_plugins do
   gem 'jekyll-timeago'
   gem 'jekyll-sitemap'
   gem 'kramdown-parser-gfm'
-   gem 'webrick'
+  gem 'webrick'
 end
-~
