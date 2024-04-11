@@ -4,7 +4,14 @@ title: About
 permalink: /about/
 ---
 
-Not a lot to say really. Mid thirties, Dad to Thomas, like a drink, like my music, follow Cardiff City and watch a bit of boxing. Bit of a technology nerd and generally have an opinion about things. Probably won't blog an awful lot despite best intentions....
+Hi, I'm Dan. I live in South Wales with my partner, two young sons and our three dogs. I work as an IT consultant and generally enjoy anything technical. In my free time I enjoy watching sport, the odd pint and the occasional game on the Xbox. 
+
+As previously predicted, I rarely actually blog. However, on the odd occasion that I do, you can expect a mix of:
+
+* Tech commentary
+* Rants about how Cardiff City will always let me down
+* Posts about music
+* Perhaps the occasional post about coffee.
 
 ### Contact me
 
