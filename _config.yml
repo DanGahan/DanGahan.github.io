@@ -15,6 +15,7 @@ avatar: https://raw.githubusercontent.com/DanGahan/DanGahan.github.io/master/lem
 # Flags below are optional
 #
 
+
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
@@ -76,6 +77,7 @@ sass:
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-paginate
 
 # Exclude these files from your production _site
 exclude:
@@ -84,3 +86,6 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+paginate: 5 
+paginate_path: "/blog/page:num/"

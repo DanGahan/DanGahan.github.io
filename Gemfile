@@ -8,4 +8,5 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'kramdown-parser-gfm'
   gem 'webrick'
+  gem "jekyll-paginate"
 end
