@@ -1,1 +1,1 @@
-bundle install ffi && bundle install && bundle exec jekyll build && bundle exec jekyll serve --host=0.0.0.0 
+bundle install && bundle exec jekyll build && bundle exec jekyll serve --host=0.0.0.0 
